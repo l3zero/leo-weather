@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
-import '../WeatherApp.css';
+import '../styles/WeatherApp.css';
 import SearchBox from './SearchBox';
+import TodayWeather from './TodayWeather';
 
 
 export class WeatherApp extends Component {
   render() {
     return (
-      <div>
+      <div className="weatherApp">
         <h1 className="weatherTitle">Leo's Weather</h1>
         <SearchBox />
+        <TodayWeather />
       </div>
     )
   }

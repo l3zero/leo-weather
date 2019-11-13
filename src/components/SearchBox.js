@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../WeatherApp.css';
+import '../styles/WeatherApp.css';
 
 export class SearchBox extends Component {
     render() {

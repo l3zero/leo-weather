@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import './WeatherApp.css';
+import './styles/index.css';
+import './styles/WeatherApp.css';
 import WeatherApp from './components/WeatherApp';
 import * as serviceWorker from './serviceWorker';
 
