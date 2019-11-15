@@ -22,9 +22,13 @@
   grid-auto-rows: minmax(10px, auto);
   align-items: stretch;
   justify-items: start;
-  width: 500px;
-  height: 400px;
+  width: 90%;
+  height: 100%;
   border: 1px solid blue;
+}
+
+.todayWeather h2 {
+  margin-left: 15px;
 }
 
 .todayDetails {

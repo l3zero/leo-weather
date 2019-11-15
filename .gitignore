@@ -6,6 +6,8 @@ npm-debug.log
 create-react-app.md
 #misc
 .DS_Store
+city.list.json
+openweatherapikey.txt
 /*.env
 .env.local
 .env.development.local

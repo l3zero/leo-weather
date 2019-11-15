@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../styles/WeatherApp.css';
-const fetch = require("node-fetch");
+const weatherApi = require('../weatherApi');
 
 export class TodayMainDetails extends Component {
     constructor(props) {
@@ -9,14 +9,12 @@ export class TodayMainDetails extends Component {
     }
     //Testing API call with DEV for now..
     componentDidMount() {
-        fetch("https://dev.to/api/articles?tag=javascript&top=3")
-            .then(res => res.json()).then(json => {
-                this.setState({
-                    deetz: JSON.stringify(json[0].url)
-                });
-            }).catch(err => {
-                console.log(err);
+        weatherApi.grabWeather().then(info => {
+            this.setState({
+                deetz: JSON.stringify(info)
             });
+        })
+
     }
 
     render() {
