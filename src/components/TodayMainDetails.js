@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../styles/WeatherApp.css';
-const weatherApi = require('../weatherApi');
+const weatherApi = require('../helpers/weatherApi');
 
 export class TodayMainDetails extends Component {
     constructor(props) {
