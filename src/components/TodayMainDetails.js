@@ -9,11 +9,11 @@ export class TodayMainDetails extends Component {
     }
 
     componentDidMount() { //grab weather will take the params from TodayWweather props
-        weatherApi.grabWeather().then(info => {
-            this.setState({
-                deetz: JSON.stringify(info)
-            });
-        })
+        // weatherApi.grabWeather().then(info => {
+        //     this.setState({
+        //         deetz: JSON.stringify(info)
+        //     });
+        // })
 
     }
 

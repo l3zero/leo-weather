@@ -1,24 +1,17 @@
-module.exports = {
-    getCoordinates: () => {
-
-        if (!navigator.geolocation) {
-            return 'Geolocation is disabled';
-
-        } else {
-            return (navigator.geolocation.getCurrentPosition(success, error));
-        }
-
-        function success(position) {
-            const latitude = position.coords.latitude;
-            const longitude = position.coords.longitude;
-            return latitude;
-        }
-
-        function error() {
-            console.log('There has been an error using geolocation');
-        }
+let getCoordinates = () => {
+    let geo_options = {
+        enableHighAccuracy: false,
+        maximumAge: 30000,
+        timeout: 27000
     }
 
+    if (!navigator.geolocation) {
+        console.log('Geolocation is disabled');
+    } else {
+        return new Promise((resolve, reject) => {
+            navigator.geolocation.getCurrentPosition(resolve, reject, geo_options);
+        })
+    }
 }
 
-// document.querySelector('#find-me').addEventListener('click', getCoordinates);
+export default getCoordinates;
