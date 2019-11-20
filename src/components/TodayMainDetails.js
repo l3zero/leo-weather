@@ -7,8 +7,8 @@ export class TodayMainDetails extends Component {
         super(props);
         this.state = { date: this.props.today, deetz: "" } //Testing passing props to new component state
     }
-    //Testing API call with DEV for now..
-    componentDidMount() {
+
+    componentDidMount() { //grab weather will take the params from TodayWweather props
         weatherApi.grabWeather().then(info => {
             this.setState({
                 deetz: JSON.stringify(info)

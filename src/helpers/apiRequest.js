@@ -1,5 +1,6 @@
 //@TO-DO Need internal caching, openWeather doesn't allow Cache-Control header
 const weatherUrl = "https://api.openweathermap.org/data/2.5/weather";
+const units = "&units=imperial";
 const apiKey = '6fb4f376b050985122f9f3d746b0f560';
 const urlKey = `&appid=${apiKey}`;
 
@@ -18,13 +19,12 @@ const init = {
 module.exports = {
 
     cityUrl: (id) => {
-        let cityId = "?id=5110302"; //use passed id later, testing for now
-        return `${weatherUrl}${cityId}${urlKey}`;
+        return `${weatherUrl}?id=${id}${units}${urlKey}`;
     },
 
-    coordUrl: (lat, lon) => {
-        let coords = `?lat=${lat}&lon=${lon}`;
-        return `${weatherUrl}${coords}${urlKey}`;
+    coordUrl: (lat, long) => {
+        let coords = `?lat=${lat}&lon=${long}`;
+        return `${weatherUrl}${coords}${units}${urlKey}`;
     },
     getInit: () => {
         return init;
