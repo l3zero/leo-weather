@@ -29,7 +29,7 @@ export class TodayWeather extends Component {
                 <div className="todayWeather">
                     <h2>Today {todayFormat}</h2>
                     <h2>Coordinates from geolocation: {this.state.latitude}, {this.state.longitude}</h2>
-                    <TodayMainDetails today={todayFormat} />
+                    <TodayMainDetails today={todayFormat} lat={this.state.latitude} long={this.state.longitude} />
                 </div>
             )
 

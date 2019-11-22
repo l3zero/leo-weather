@@ -5,15 +5,15 @@ const weatherApi = require('../helpers/weatherApi');
 export class TodayMainDetails extends Component {
     constructor(props) {
         super(props);
-        this.state = { date: this.props.today, deetz: "" } //Testing passing props to new component state
+        this.state = { date: this.props.today, latitude: this.props.lat, longitude: this.props.long, deetz: '' }
     }
 
-    componentDidMount() { //grab weather will take the params from TodayWweather props
-        // weatherApi.grabWeather().then(info => {
-        //     this.setState({
-        //         deetz: JSON.stringify(info)
-        //     });
-        // })
+    componentDidMount() {
+        weatherApi.grabWeather(this.state.latitude, this.state.longitude).then(info => {
+            this.setState({
+                deetz: JSON.stringify(info)
+            });
+        })
 
     }
 
@@ -21,7 +21,7 @@ export class TodayMainDetails extends Component {
         return (
             <div className="todayDetails">
                 Date from props: {this.state.date}<br></br>
-                State details from test API call: {this.state.deetz}
+                State details from coordinate API call: {this.state.deetz}
             </div>
         )
     }
