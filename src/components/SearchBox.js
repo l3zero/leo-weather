@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import '../styles/WeatherApp.css';
 
 export class SearchBox extends Component {
+    componentDidMount() {
+    }
     render() {
         return (
 
@@ -10,7 +12,7 @@ export class SearchBox extends Component {
                 <div className="mdc-notched-outline">
                     <div className="mdc-notched-outline__leading"></div>
                     <div className="mdc-notched-outline__notch">
-                        <label for="text-field-hero-input" className="mdc-floating-label"></label>
+                        <label htmlFor="text-field-hero-input" className="mdc-floating-label"></label>
                     </div>
                     <div className="mdc-notched-outline__trailing"></div>
                 </div>
