@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css?family=Shadows+Into+Light&display=swap");
-
 .weatherApp {
   display: grid;
   grid-template-columns: 1fr;
@@ -18,6 +17,33 @@
 
 .searchBar {
   margin-bottom: 20px;
+  border: 2px groove white;
+  border-radius: 5px;
+  background-color: darkblue;
+  color: white;
+  font-size: 15px;
+  text-align: center;
+}
+
+.suggestions {
+  margin: 0;
+  padding: 0;
+  /* position: relative; */
+  /*perspective: 20px;*/
+}
+
+.suggestions li {
+  background: lightslategray;
+  color: white;
+  list-style: none;
+  border-bottom: 1px solid #D8D8D8;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.14);
+  margin: 0;
+  /* padding: 20px; */
+  transition: background 0.2s;
+  display: flex;
+  justify-content: space-between;
+  text-transform: capitalize;
 }
 
 .todayWeather {

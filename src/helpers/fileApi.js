@@ -1,6 +1,5 @@
 const fs = require('fs');
 const cities = require('./../city.list.json');
-const newCities = require('./../cities.json');
 
 function maker() {
 
@@ -14,9 +13,9 @@ function maker() {
     return newCities;
 };
 
-(function tester() {
-    console.log(newCities.find(city => city.name === 'Brooklyn'));
-})();
+// (function tester() {
+//     console.log(newCities.find(city => city.name === 'Brooklyn'));
+// })();
 
 function writer(newJson) {
     fs.writeFile('./cities.json', JSON.stringify(newJson), (err) => {
