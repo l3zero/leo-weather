@@ -25,14 +25,14 @@
   text-align: center;
 }
 
-.suggestions {
+.suggestList {
   margin: 0;
   padding: 0;
   /* position: relative; */
   /*perspective: 20px;*/
 }
 
-.suggestions li {
+.suggestList li {
   background: lightslategray;
   color: white;
   list-style: none;
@@ -42,6 +42,7 @@
   /* padding: 20px; */
   transition: background 0.2s;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   text-transform: capitalize;
 }

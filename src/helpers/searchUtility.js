@@ -1,14 +1,17 @@
-const cityIds = require('./../cities.json');
+const citiez = require('./../city.list.json');
+const cityIds = [...citiez];
 
-export function displayMatches(cityName) {
-    const matchArray = this.findMatches(cityName);
+export function displayMatches(input) {
+    // console.table(cityIds);
+    const matchArray = findMatches(input);
+    // matchArray.sort();
     const html = matchArray.map(place => {
-        const regex = new RegExp(cityName, 'gi');
-        const cityName = place.name.replace(regex, `<span class="hl">${cityName}</span>`);
+        // const regex = new RegExp(input, 'gi');
+        // const cityName = place.name.replace(regex, `${input}`);
 
-        return `<li>${cityName}</li>`;
-    }).join('');
-    return html;
+        return `${place.name}-${place.id}`;
+    })
+    return html.splice(0, 3);
 }
 
 function findMatches(word) {
