@@ -1,52 +1,41 @@
 import React, { Component } from 'react';
 import '../styles/WeatherApp.css';
-// import displayMatches from '../helpers/searchUtility';
-const cityIds = require('./../cities.json');
+import displayMatches from '../helpers/searchUtility';
 
 export class SearchBox extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            suggestions: `<li>Default suggestion test</li>`, city: ''
         }
-        // this.displayMatches = this.displayMatches.bind(this);
-        // this.findMatches = this.findMatches.bind(this);
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    componentDidMount() {
-        const searchInput = document.querySelector('.searchBar');
-        const suggestions = document.querySelector('.suggestions');
-        console.log(suggestions);
-        searchInput.addEventListener('change', this.displayMatches);
-        searchInput.addEventListener('keyup', this.displayMatches);
+    handleChange(e) {
+        // console.log(`${e.target.value} e target value from searchbox child`);
+        this.setState({
+            city: e.target.value
+        })
     }
 
-
-    // displayMatches() {
-    //     const matchArray = this.findMatches(this.value);
-    //     const html = matchArray.map(place => {
-    //         const regex = new RegExp(this.value, 'gi');
-    //         const cityName = place.name.replace(regex, `<span class="hl">${this.value}</span>`);
-
-    //         return `<li>${cityName}</li>`;
-    //     }).join(''); //The .join turns the newly mapped array into string
-    //     this.state.suggestions.innerHTML = html; //Will this use the correct jawn?
-    // }
-
-    // findMatches(word) {
-    //     return cityIds.filter(place => {
-    //         //figure out if the city exists based on search
-    //         const regex = new RegExp(word, 'gi'); //g = global, i = case insensitive
-    //         return place.name.match(regex);
-    //     });
-    // }
+    handleSubmit(e) {
+        e.preventDefault();
+        // console.log(`${this.state.city} target value from searchbox handleSubmit`);
+        this.props.citySubmit(this.state.city);
+    }
 
     render() {
         return (
-            <form className="searchForm">
-                <input type="text" className="searchBar" placeholder="Enter city..."></input>
+            <form className="searchForm" onSubmit={this.handleSubmit}>
+                <label>
+                    <input type="text" name="cityName" className="searchBar" placeholder="Enter city..." onChange={this.handleChange} onKeyUp={this.handleChange} />
+
+                </label>
+                <input type="submit" value="Submit" />
                 <ul className="suggestions">
-                    <li>Filter for a city</li>
+                    {this.state.suggestions}
                 </ul>
 
             </form>

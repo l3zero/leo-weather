@@ -1,14 +1,14 @@
 const cityIds = require('./../cities.json');
 
-export function displayMatches(suggestList) {
-    const matchArray = findMatches(this.value);
+export function displayMatches(cityName) {
+    const matchArray = this.findMatches(cityName);
     const html = matchArray.map(place => {
-        const regex = new RegExp(this.value, 'gi');
-        const cityName = place.name.replace(regex, `<span class="hl">${this.value}</span>`);
+        const regex = new RegExp(cityName, 'gi');
+        const cityName = place.name.replace(regex, `<span class="hl">${cityName}</span>`);
 
         return `<li>${cityName}</li>`;
-    }).join(''); //The .join turns the newly mapped array into string
-    suggestList.innerHTML = html; //Will this use the correct jawn?
+    }).join('');
+    return html;
 }
 
 function findMatches(word) {

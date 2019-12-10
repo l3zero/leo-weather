@@ -5,7 +5,7 @@ const weatherApi = require('../helpers/weatherApi');
 export class TodayMainDetails extends Component {
     constructor(props) {
         super(props);
-        this.state = { date: this.props.today, latitude: this.props.lat, longitude: this.props.long, deetz: '' }
+        this.state = { date: this.props.today, latitude: this.props.lat, longitude: this.props.long, deetz: '', city: this.props.city }
     }
 
     componentDidMount() {
