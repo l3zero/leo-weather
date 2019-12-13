@@ -6,7 +6,7 @@ export class SearchBox extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            suggestions: [], city: ''
+            suggestions: [], selectedCity: ''
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -18,7 +18,7 @@ export class SearchBox extends Component {
         e.preventDefault();
         // console.log(`${e.target.value} e target value from searchbox child`);
         this.setState({
-            city: e.target.value,
+            selectedCity: e.target.value,
             suggestions: displayMatches(e.target.value)
         })
     }
@@ -26,12 +26,12 @@ export class SearchBox extends Component {
     handleSubmit(e) {
         e.preventDefault();
         // console.log(`${this.state.city} target value from searchbox handleSubmit`);
-        this.props.citySubmit(this.state.city);
+        this.props.citySubmit(this.state.selectedCity);
     }
 
     listClick(e) {
         this.setState({
-            city: e.target.innerHTML
+            selectedCity: e.target.innerHTML
         })
     }
 
@@ -39,7 +39,7 @@ export class SearchBox extends Component {
         return (
             <form className="searchForm" onSubmit={this.handleSubmit}>
 
-                <input type="text" value={this.state.city} name="cityName" className="searchBar" placeholder="Enter city..." onChange={this.handleChange} />
+                <input type="text" value={this.state.selectedCity} name="cityName" className="searchBar" placeholder="Enter city..." onChange={this.handleChange} />
 
                 <input type="submit" value="Submit" />
                 <ul className="suggestList" onClick={this.listClick}>
