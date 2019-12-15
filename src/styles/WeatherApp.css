@@ -25,6 +25,10 @@
   text-align: center;
 }
 
+#searchSubmit {
+  display: none;
+}
+
 .suggestList {
   margin: 0;
   padding: 0;

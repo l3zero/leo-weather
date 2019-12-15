@@ -6,7 +6,7 @@ export class SearchBox extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            suggestions: [], selectedCity: ''
+            suggestions: [], cityName: '', selectedId: ''
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -16,34 +16,39 @@ export class SearchBox extends Component {
 
     handleChange(e) {
         e.preventDefault();
-        // console.log(`${e.target.value} e target value from searchbox child`);
+        let searchResults = JSON.parse(displayMatches(e.target.value));
         this.setState({
-            selectedCity: e.target.value,
-            suggestions: displayMatches(e.target.value)
+            cityName: e.target.value,
+            suggestions: searchResults
         })
+        //Submit is hidden while user is typing
+        document.getElementById('searchSubmit').style.display = 'none';
+
     }
 
     handleSubmit(e) {
         e.preventDefault();
-        // console.log(`${this.state.city} target value from searchbox handleSubmit`);
-        this.props.citySubmit(this.state.selectedCity);
+        this.props.cityId(this.state.selectedId);
     }
 
     listClick(e) {
         this.setState({
-            selectedCity: e.target.innerHTML
+            cityName: e.target.innerHTML,
+            selectedId: e.target.getAttribute("id")
         })
+        //Submit appears only when a valid entry has been clicked
+        document.getElementById('searchSubmit').style.display = 'initial';
     }
 
     render() {
         return (
             <form className="searchForm" onSubmit={this.handleSubmit}>
 
-                <input type="text" value={this.state.selectedCity} name="cityName" className="searchBar" placeholder="Enter city..." onChange={this.handleChange} />
+                <input type="text" value={this.state.cityName} name="cityName" className="searchBar" placeholder="Enter city..." onChange={this.handleChange} />
 
-                <input type="submit" value="Submit" />
-                <ul className="suggestList" onClick={this.listClick}>
-                    {this.state.suggestions.map((item, index) => <li key={index}>{item.slice(0, item.indexOf('-'))}</li>)}
+                <input id="searchSubmit" type="submit" value="Submit" />
+                <ul className="suggestList">
+                    {this.state.suggestions.map(item => <li id={item.id} key={item.id} onClick={this.listClick} >{item.name}</li>)}
                 </ul>
 
             </form>
