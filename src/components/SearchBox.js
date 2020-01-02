@@ -1,34 +1,34 @@
-import React, { Component } from 'react';
-import '../styles/WeatherApp.css';
-import displayMatches from '../helpers/searchUtility';
+import React, { Component } from 'react'
+import '../styles/WeatherApp.css'
+import displayMatches from '../helpers/searchUtility'
 
 export class SearchBox extends Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             suggestions: [], cityName: '', selectedId: ''
         }
 
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.listClick = this.listClick.bind(this);
+        this.handleChange = this.handleChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
+        this.listClick = this.listClick.bind(this)
     }
 
     handleChange(e) {
-        e.preventDefault();
-        let searchResults = JSON.parse(displayMatches(e.target.value));
+        e.preventDefault()
+        let searchResults = JSON.parse(displayMatches(e.target.value))
         this.setState({
             cityName: e.target.value,
             suggestions: searchResults
         })
         //Submit is hidden while user is typing
-        document.getElementById('searchSubmit').style.display = 'none';
+        document.getElementById('searchSubmit').style.display = 'none'
 
     }
 
     handleSubmit(e) {
-        e.preventDefault();
-        this.props.cityId(this.state.selectedId);
+        e.preventDefault()
+        this.props.cityId(this.state.selectedId)
     }
 
     listClick(e) {
@@ -37,7 +37,7 @@ export class SearchBox extends Component {
             selectedId: e.target.getAttribute("id")
         })
         //Submit appears only when a valid entry has been clicked
-        document.getElementById('searchSubmit').style.display = 'initial';
+        document.getElementById('searchSubmit').style.display = 'initial'
     }
 
     render() {

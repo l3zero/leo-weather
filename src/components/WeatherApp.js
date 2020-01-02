@@ -1,15 +1,17 @@
-import React, { Component } from 'react';
-import '../styles/WeatherApp.css';
-import SearchBox from './SearchBox';
-import TodayWeather from './TodayWeather';
+import React, { Component } from 'react'
+import '../styles/WeatherApp.css'
+import SearchBox from './SearchBox'
+import TodayWeather from './TodayWeather'
 
 export class WeatherApp extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       cityId: ''
     }
-    this.handleCitySubmit = this.handleCitySubmit.bind(this);
+
+    this.handleCitySubmit = this.handleCitySubmit.bind(this)
+
   }
 
   handleCitySubmit(cityId) {
@@ -30,4 +32,3 @@ export class WeatherApp extends Component {
 }
 
 export default WeatherApp
-
