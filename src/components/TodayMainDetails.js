@@ -22,8 +22,16 @@ export class TodayMainDetails extends Component {
                 })
             })
         }
+    }
 
-
+    componentDidUpdate(prevProps) {
+        if (this.props.cityId !== prevProps.cityId) {
+            weatherApi.grabWeather(this.props.cityId).then(info => {
+                this.setState({
+                    todayInfo: JSON.stringify(info)
+                })
+            })
+        }
     }
 
     render() {

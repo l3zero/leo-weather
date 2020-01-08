@@ -12,20 +12,22 @@ const iconUrl = "http://openweathermap.org/img/wn/10d@2x.png";//replace 10d with
 const cache = new nodeCache({ stdTTL: 60, maxKeys: 1000000 }) //testing with 60 seconds for now
 
 module.exports = {
-    grabWeather: async (city, coords) => {
+    grabWeather: async (cityId, coords) => {
         let myRequest, response, jsonData, myData;
         if (coords === undefined) {
             try {
-                if (cache.has(city)) {
-                    myData = cache.get(city)
+                if (cache.has(cityId)) {
+                    myData = cache.get(cityId)
                     console.log("testing - city data retrieved from cache")
                 } else {
-                    myRequest = createCityRequest(city);
+                    myRequest = createCityRequest(cityId);
                     response = await fetch(myRequest).then(checkStatus);
                     jsonData = await response.json();
                     myData = convert.convertJson(jsonData);
-                    cache.set(city, myData);
+                    cache.set(cityId, myData);
                     console.log("testing - cache city data has been set")
+                    console.log(cache.get(cityId))
+                    console.log(cache.keys())
                 }
             } catch (error) {
                 console.log(JSON.stringify(error));
@@ -33,15 +35,15 @@ module.exports = {
         } else {
             try {
                 //Might need to update this key after testing - might be redundant if GPS is used
-                if (cache.has(`${city}${coords}`)) {
-                    myData = cache.get(`${city}${coords}`)
+                if (cache.has(`${cityId}${coords}`)) {
+                    myData = cache.get(`${cityId}${coords}`)
                     console.log("testing - coordinate data retrieved from cache")
                 } else {
-                    myRequest = createCoordsRequest(city, coords);
+                    myRequest = createCoordsRequest(cityId, coords);
                     response = await fetch(myRequest).then(checkStatus);
                     jsonData = await response.json();
                     myData = convert.convertJson(jsonData);
-                    cache.set(`${city}${coords}`, myData);
+                    cache.set(`${cityId}${coords}`, myData);
                     console.log("testing - cache coords data has been set")
 
                 }
