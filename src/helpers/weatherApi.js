@@ -4,7 +4,7 @@
 const fetch = require('node-fetch');
 const nodeCache = require('node-cache');
 const apiReq = require('./apiRequest');
-const convert = require('./convertJson');
+const data = require('./dataUtility');
 const cache = new nodeCache({ stdTTL: 600, maxKeys: 1000000 }) //keeps same weather for 10 mins
 module.exports = {
     grabWeather: async (cityId, coords) => {
@@ -17,7 +17,7 @@ module.exports = {
                     myRequest = createCityRequest(cityId);
                     response = await fetch(myRequest).then(checkStatus);
                     jsonData = await response.json();
-                    myData = convert.convertJson(jsonData);
+                    myData = data.convertJson(jsonData);
                     cache.set(cityId, myData);
                     console.log("testing - cache city data has been set")
                 }
@@ -32,7 +32,7 @@ module.exports = {
                     myRequest = createCoordsRequest(cityId, coords);
                     response = await fetch(myRequest).then(checkStatus);
                     jsonData = await response.json();
-                    myData = convert.convertJson(jsonData);
+                    myData = data.convertJson(jsonData);
                     cache.set(`${cityId}_${coords}`, myData);
 
                 }
