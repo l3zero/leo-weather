@@ -10,7 +10,7 @@ export class TodayMainDetails extends Component {
 
     componentDidMount() {
         if (this.state.latitude !== null && this.state.longitude !== null) {
-            weatherApi.grabWeather(Math.round(this.state.latitude * 10000) / 10000, Math.round(this.state.longitude * 10000) / 10000).then(info => {
+            weatherApi.grabWeather(this.state.latitude, this.state.longitude).then(info => {
                 this.setState({
                     todayInfo: JSON.stringify(info)
                 })

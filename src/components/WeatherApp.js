@@ -1,3 +1,4 @@
+//@TO-DO Prolly need to refactor with state / prop storage - only need props
 import React, { Component } from 'react'
 import '../styles/WeatherApp.css'
 import SearchBox from './SearchBox'

@@ -12,8 +12,8 @@ export class TodayWeather extends Component {
     componentDidMount() {
         getCoordinates().then(pos => {
             this.setState({
-                latitude: pos.coords.latitude,
-                longitude: pos.coords.longitude
+                latitude: pos.coords.latitude.toFixed(2),
+                longitude: pos.coords.longitude.toFixed(2)
             })
         })
             .catch(err => {
@@ -23,12 +23,13 @@ export class TodayWeather extends Component {
 
     render() {
         let today = this.state.date
-        let todayFormat = today.getFullYear() + `-` + (today.getMonth() + 1) + `-` + today.getDate()
+        let todayFormat = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`
 
         if (!(this.state.latitude === null) || !(this.state.longitude === null) || !(this.props.cityId === '')) {
             return (
                 <div className="todayWeather">
                     <h2>Today {todayFormat}</h2>
+                    <h2>{this.state.latitude} --- {this.state.longitude}</h2>
                     <TodayMainDetails today={todayFormat} lat={this.state.latitude} long={this.state.longitude} cityId={this.props.cityId} />
                 </div>
             )

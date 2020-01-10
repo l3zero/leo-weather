@@ -1,7 +1,6 @@
-//@TO-DO Need internal caching, openWeather doesn't allow Cache-Control header
 const weatherUrl = "https://api.openweathermap.org/data/2.5/weather";
 const units = "&units=imperial";
-const apiKey = '6fb4f376b050985122f9f3d746b0f560'; //Pull from file, shouldn't be here
+const apiKey = '6fb4f376b050985122f9f3d746b0f560'; //@TO-DO Pull from file, shouldn't be here
 const urlKey = `&appid=${apiKey}`;
 
 const headers = new Headers({
