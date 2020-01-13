@@ -1,6 +1,6 @@
 const weatherUrl = "https://api.openweathermap.org/data/2.5/weather";
 const units = "&units=imperial";
-const apiKey = '6fb4f376b050985122f9f3d746b0f560'; //@TO-DO Pull from file, shouldn't be here
+const apiKey = '6fb4f376b050985122f9f3d746b0f560';
 const urlKey = `&appid=${apiKey}`;
 
 const headers = new Headers({
@@ -24,6 +24,11 @@ module.exports = {
     coordUrl: (lat, long) => {
         let coords = `?lat=${lat}&lon=${long}`;
         return `${weatherUrl}${coords}${units}${urlKey}`;
+    },
+    mapUrl: (lat, long) => {
+        let coords = `?lat=${lat}&lon=${long}`;
+        //Testing with clouds first
+        return `https://tile.openweathermap.org/map/clouds_new/3/${lat}/${long}.png?appid=${apiKey}`
     },
     getInit: () => {
         return init;

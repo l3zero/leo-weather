@@ -1,11 +1,10 @@
 //Open Weather Map API - See https://openweathermap.org/current for more info
-//@TO-DO figure out why readFile not working
 //@TO-DO check for empty responses and show appropriate message back
 const fetch = require('node-fetch');
 const nodeCache = require('node-cache');
 const apiReq = require('./apiRequest');
 const data = require('./dataUtility');
-const cache = new nodeCache({ stdTTL: 600, maxKeys: 1000000 }) //keeps same weather for 10 mins
+const cache = new nodeCache({ stdTTL: 600, maxKeys: 1000000 }) //In seconds
 module.exports = {
     grabWeather: async (cityId, coords) => {
         let myRequest, response, jsonData, myData;
@@ -19,7 +18,6 @@ module.exports = {
                     jsonData = await response.json();
                     myData = data.convertJson(jsonData);
                     cache.set(cityId, myData);
-                    console.log("testing - cache city data has been set")
                 }
             } catch (error) {
                 console.log(JSON.stringify(error));
@@ -41,7 +39,21 @@ module.exports = {
             }
         }
         return myData;
+    },
+    grabMap: async (lat, long) => {
+        let myRequest, response;
+        if (lat !== undefined && long !== undefined) {
+            try {
+                myRequest = createMapRequest(lat, long);
+                response = await fetch(myRequest).then(checkStatus);
+            } catch (error) {
+                console.log(JSON.stringify(error));
+            }
+
+        }
+        return response;
     }
+
 };
 
 function checkStatus(res) {
@@ -59,4 +71,8 @@ function createCityRequest(cityId) {
 
 function createCoordsRequest(lat, long) {
     return new Request(apiReq.coordUrl(lat, long), apiReq.getInit());
+}
+
+function createMapRequest(lat, long) {
+    return new Request(apiReq.mapUrl(lat, long), apiReq.getInit());
 }
