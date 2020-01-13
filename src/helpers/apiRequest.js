@@ -26,7 +26,6 @@ module.exports = {
         return `${weatherUrl}${coords}${units}${urlKey}`;
     },
     mapUrl: (lat, long) => {
-        let coords = `?lat=${lat}&lon=${long}`;
         //Testing with clouds first
         return `https://tile.openweathermap.org/map/clouds_new/3/${lat}/${long}.png?appid=${apiKey}`
     },
