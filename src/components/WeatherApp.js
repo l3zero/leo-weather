@@ -26,12 +26,10 @@ export class WeatherApp extends Component {
   handleGps(e) {
     e.preventDefault()
     gps.getCoordinates().then(pos => {
-
       this.setState({
         latitude: pos.coords.latitude.toFixed(2),
         longitude: pos.coords.longitude.toFixed(2)
       })
-
     })
       .catch(err => {
         document.getElementById('gpsTog').innerHTML = err.message
@@ -41,9 +39,11 @@ export class WeatherApp extends Component {
   render() {
     return (
       <div className="weatherApp">
-        <h1 className="weatherTitle">Weather Fonts</h1>
-        <SearchBox cityId={this.handleCitySubmit} />
-        <button id="gpsTog" onClick={this.handleGps}>Use my Location</button>
+        <div className="weatherTitle"><span>Dude, Weather</span></div>
+        <div className="search">
+          <SearchBox cityId={this.handleCitySubmit} />
+          <button id="gpsTog" onClick={this.handleGps}>Location</button>
+        </div>
         <TodayWeather cityId={this.state.cityId} lat={this.state.latitude} long={this.state.longitude} />
       </div>
     )

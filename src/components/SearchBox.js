@@ -42,11 +42,12 @@ export class SearchBox extends Component {
 
     render() {
         return (
-            <form className="searchForm" onSubmit={this.handleSubmit}>
+            <form onSubmit={this.handleSubmit}>
 
-                <input type="text" value={this.state.cityName} name="cityName" className="searchBar" placeholder="Enter city..." onChange={this.handleChange} />
+                <input id="searchBar" type="text" value={this.state.cityName} name="cityName" placeholder="Enter city..." onChange={this.handleChange} />
 
                 <input id="searchSubmit" type="submit" value="Submit" />
+
                 <ul className="suggestList">
                     {this.state.suggestions.map(item => <li id={item.id} key={item.id} onClick={this.listClick} >{item.name}</li>)}
                 </ul>

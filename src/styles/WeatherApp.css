@@ -1,55 +1,100 @@
-@import url("https://fonts.googleapis.com/css?family=Shadows+Into+Light&display=swap");
-@import url("https://fonts.googleapis.com/css?family=Playfair+Display&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Black+And+White+Picture&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Kodchasan&display=swap');
+* {
+  box-sizing: border-box;
+}
+
 .weatherApp {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-auto-rows: minmax(10px, auto);
-  align-items: start;
-  justify-items: center;
-  color: white;
-  border: 1px solid green;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  /* border: 1px solid green; */
 }
 
 .weatherTitle {
-  font-family: "Shadows Into Light", cursive;
-  font-size: 60px;
-  border: 1px solid yellow;
+  font-family: 'Black And White Picture', sans-serif;
+  font-size: 100px;
+  /* border: 1px solid yellow; */
 }
 
-.searchBar {
-  margin-bottom: 20px;
-  border: 2px groove white;
-  border-radius: 5px;
-  background-color: darkblue;
+/*@TO-DO Not sure why clip doesnt work*/
+
+.weatherTitle span {
+  /* background-image: url(../img/let-there-be-sun.png) no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text; */
+}
+
+.search {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 50px;
+  font-family: 'Kodchasan', sans-serif;
+  text-align: start;
+}
+
+#searchBar {
+  margin-bottom: 10px;
+  padding-left: 10px;
+  width: 200px;
+  height: 45px;
+  background-color: rgba(199, 199, 199, 0.925);
+  border: 2px solid blue;
+  border-radius: 20px;
+  outline: none;
+  font-size: 20px;
+}
+
+#gpsTog {
+  margin-left: 30px;
+  background: darkblue;
+  border: 2px solid rgb(127, 140, 214);
+  border-radius: 20px;
   color: white;
+  font-family: 'Kodchasan', sans-serif;
   font-size: 15px;
   text-align: center;
 }
 
 #searchSubmit {
   display: none;
+  width: 75px;
+  height: 25px;
+  margin-left: 10px;
+  background-color: darkblue;
+  border: 2px solid rgb(127, 140, 214);
+  border-radius: 20px;
+  outline: none;
+  color: white;
+  font-family: 'Kodchasan', sans-serif;
+  font-size: 15px;
 }
 
 .suggestList {
-  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 20px;
+  margin-top: 0px;
   padding: 0;
-  /* position: relative; */
-  /*perspective: 20px;*/
+  font-size: 14px;
+  /* position: relative;
+  perspective: 20px; */
 }
 
 .suggestList li {
-  background: lightslategray;
+  background: none;
   color: white;
   list-style: none;
-  border-bottom: 1px solid #D8D8D8;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.14);
-  margin: 0;
-  /* padding: 20px; */
-  transition: background 0.2s;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  text-transform: capitalize;
+  text-decoration: none;
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.14); */
+}
+
+.suggestList li:hover {
+  background-color: blue;
 }
 
 .todayWeather {
@@ -73,8 +118,6 @@
   /* align-self: stretch; */
   border: 1px solid red;
 }
-
-/*@TO-DO Fix this styling up later*/
 
 .tab {
   display: grid;

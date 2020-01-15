@@ -4,7 +4,6 @@ import '../styles/WeatherApp.css'
 
 export class TodayWeather extends Component {
 
-
     render() {
 
         if (!(this.props.lat === null) || !(this.props.long === null) || !(this.props.cityId === '')) {

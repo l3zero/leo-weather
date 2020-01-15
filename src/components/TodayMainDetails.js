@@ -5,7 +5,6 @@ const moment = require('moment')
 const data = require('../helpers/dataUtility');
 
 //@TO-DO API data list needs unique keys for each li
-
 export class TodayMainDetails extends Component {
     constructor(props) {
         super(props)
@@ -30,15 +29,22 @@ export class TodayMainDetails extends Component {
         document.getElementById("defaultOpen").click()
     }
 
-    componentDidUpdate(prevProps) {
+    componentDidUpdate(prevProps, prevState) {
         if (this.props.cityId !== prevProps.cityId) {
             weatherApi.grabWeather(this.props.cityId).then(info => {
                 this.setState({
                     todayInfo: info
                 })
             })
+        } else if (this.props.lat !== prevProps.lat && this.props.long !== prevProps.long) {
+            weatherApi.grabWeather(this.props.lat, this.props.long).then(info => {
+                this.setState({
+                    todayInfo: info
+                })
+            })
         }
     }
+
     //Handles toggling tabs
     openTab(e) {
         e.preventDefault()
