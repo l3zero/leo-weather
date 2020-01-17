@@ -8,9 +8,7 @@ export class TodayWeather extends Component {
 
         if (!(this.props.lat === null) || !(this.props.long === null) || !(this.props.cityId === '')) {
             return (
-                <div className="todayWeather">
-                    <TodayMainDetails lat={this.props.lat} long={this.props.long} cityId={this.props.cityId} />
-                </div>
+                <TodayMainDetails lat={this.props.lat} long={this.props.long} cityId={this.props.cityId} />
             )
         } else {
             return null

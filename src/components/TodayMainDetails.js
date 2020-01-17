@@ -57,7 +57,7 @@ export class TodayMainDetails extends Component {
         for (i = 0; i < tablinks.length; i++) {
             tablinks[i].className = tablinks[i].className.replace(" active", "");
         }
-        document.getElementById(e.target.innerHTML).style.display = "grid";
+        document.getElementById(e.target.innerHTML).style.display = "initial";
         e.currentTarget.className += " active";
     }
 

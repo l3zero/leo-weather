@@ -14,41 +14,33 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#39b4f7+4,39b4f7+17,39b4f7+35,2496e8+49,3c93e0+68,8dbceb+83,b5d1f1+100 */
-  background: #39b4f7; /* Old browsers */
-  background: -moz-linear-gradient(
-    -45deg,
-    hsla(201, 92%, 60%, 1) 4%,
-    hsla(201, 92%, 60%, 1) 17%,
-    hsla(201, 92%, 60%, 1) 35%,
-    hsla(205, 81%, 53%, 1) 49%,
-    hsla(208, 73%, 56%, 1) 68%,
-    hsla(210, 70%, 74%, 1) 83%,
-    hsla(212, 68%, 83%, 1) 100%
-  ); /* FF3.6-15 */
-  background: -webkit-linear-gradient(
-    -45deg,
-    hsla(201, 92%, 60%, 1) 4%,
-    hsla(201, 92%, 60%, 1) 17%,
-    hsla(201, 92%, 60%, 1) 35%,
-    hsla(205, 81%, 53%, 1) 49%,
-    hsla(208, 73%, 56%, 1) 68%,
-    hsla(210, 70%, 74%, 1) 83%,
-    hsla(212, 68%, 83%, 1) 100%
-  ); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(
-      135deg,
-      hsla(201, 92%, 60%, 1) 4%,
-      hsla(201, 92%, 60%, 1) 17%,
-      hsla(201, 92%, 60%, 1) 35%,
-      hsla(205, 81%, 53%, 1) 49%,
-      hsla(208, 73%, 56%, 1) 68%,
-      hsla(210, 70%, 74%, 1) 83%,
-      hsla(212, 68%, 83%, 1) 100%
-    )
-    no-repeat; /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#39b4f7', endColorstr='#b5d1f1',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  background: url(../img/clouds.jpeg) no-repeat;
+  background-size: cover;
+
+  /* -webkit-animation: bg-animation 1s linear infinite;
+  -webkit-transform: translate3d(0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  animation: bg-animation 1s linear infinite;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden; */
+
+  /* border: 1px solid green; */
 }
 
-#root {
+@-webkit-keyframes bg-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes bg-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
 }

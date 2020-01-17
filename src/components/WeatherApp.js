@@ -39,10 +39,10 @@ export class WeatherApp extends Component {
   render() {
     return (
       <div className="weatherApp">
-        <div className="weatherTitle"><span>Dude, Weather</span></div>
+        <img id="gpsTog" src={require('../img/gps.svg')} alt="gps icon" onClick={this.handleGps} />
+        <div className="weatherTitle"><span>Dude, Weather.</span></div>
         <div className="search">
           <SearchBox cityId={this.handleCitySubmit} />
-          <button id="gpsTog" onClick={this.handleGps}>Location</button>
         </div>
         <TodayWeather cityId={this.state.cityId} lat={this.state.latitude} long={this.state.longitude} />
       </div>
