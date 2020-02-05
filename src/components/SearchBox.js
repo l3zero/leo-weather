@@ -29,6 +29,13 @@ export class SearchBox extends Component {
     handleSubmit(e) {
         e.preventDefault()
         this.props.cityId(this.state.selectedId)
+        //Remove submit button
+        document.getElementById('searchSubmit').style.display = 'none'
+        //Reset searchBar values
+        this.setState({
+            cityName: '',
+            suggestions: []
+        })
     }
 
     listClick(e) {

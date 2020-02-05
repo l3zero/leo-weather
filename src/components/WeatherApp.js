@@ -3,13 +3,14 @@ import React, { Component } from 'react'
 import '../styles/WeatherApp.css'
 import SearchBox from './SearchBox'
 import TodayWeather from './TodayWeather'
+const moment = require('moment')
 const gps = require('../helpers/geolocation')
 
 export class WeatherApp extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      cityId: '', latitude: null, longitude: null
+      cityId: '', latitude: null, longitude: null, date: moment().format('LLLL')
     }
 
     this.handleCitySubmit = this.handleCitySubmit.bind(this)
@@ -27,8 +28,8 @@ export class WeatherApp extends Component {
     e.preventDefault()
     gps.getCoordinates().then(pos => {
       this.setState({
-        latitude: pos.coords.latitude.toFixed(2),
-        longitude: pos.coords.longitude.toFixed(2)
+        latitude: pos.coords.latitude.toFixed(7),
+        longitude: pos.coords.longitude.toFixed(7)
       })
     })
       .catch(err => {
@@ -40,7 +41,8 @@ export class WeatherApp extends Component {
     return (
       <div className="weatherApp">
         <img id="gpsTog" src={require('../img/gps.svg')} alt="gps icon" onClick={this.handleGps} />
-        <div className="weatherTitle"><span>Dude, Weather.</span></div>
+        <div className="weatherTitle"><span>Weather.</span></div>
+        <div className="todayDate">{this.state.date}</div>
         <div className="search">
           <SearchBox cityId={this.handleCitySubmit} />
         </div>

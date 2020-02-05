@@ -6,7 +6,7 @@ const apiReq = require('./apiRequest');
 const data = require('./dataUtility');
 const cache = new nodeCache({ stdTTL: 600, maxKeys: 1000000 }) //In seconds
 module.exports = {
-    grabWeather: async (cityId, coords) => {
+    grabCurrentWeather: async (cityId, coords) => {
         let myRequest, response, jsonData, myData;
         if (coords === undefined) {
             try {
@@ -16,7 +16,7 @@ module.exports = {
                     myRequest = createCityRequest(cityId);
                     response = await fetch(myRequest).then(checkStatus);
                     jsonData = await response.json();
-                    myData = data.convertJson(jsonData);
+                    myData = data.convertCurrent(jsonData);
                     cache.set(cityId, myData);
                 }
             } catch (error) {
@@ -30,7 +30,7 @@ module.exports = {
                     myRequest = createCoordsRequest(cityId, coords);
                     response = await fetch(myRequest).then(checkStatus);
                     jsonData = await response.json();
-                    myData = data.convertJson(jsonData);
+                    myData = data.convertCurrent(jsonData);
                     cache.set(`${cityId}_${coords}`, myData);
 
                 }

@@ -8,22 +8,18 @@ html {
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
   background: url(../img/clouds.jpeg) no-repeat;
   background-size: cover;
-
-  /* -webkit-animation: bg-animation 1s linear infinite;
+  background-position: center;
+  -webkit-animation: bg-animation 80s linear infinite;
   -webkit-transform: translate3d(0, 0, 0);
   -webkit-backface-visibility: hidden;
-  animation: bg-animation 1s linear infinite;
+  animation: bg-animation 80s linear infinite;
   transform: translate3d(0, 0, 0);
-  backface-visibility: hidden; */
-
+  backface-visibility: hidden;
   /* border: 1px solid green; */
 }
 
