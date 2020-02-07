@@ -1,5 +1,5 @@
 const currentWeatherUrl = "https://api.openweathermap.org/data/2.5/weather"
-const fiveDayUrl = "https://api.openweathermap.org/data/2.5/forecast/daily"
+const fiveDayUrl = "https://api.openweathermap.org/data/2.5/forecast"
 const units = "&units=imperial"
 const apiKey = '6fb4f376b050985122f9f3d746b0f560'
 const urlKey = `&appid=${apiKey}`
@@ -23,7 +23,7 @@ module.exports = {
     },
 
     fivedayCityUrl: (id) => {
-        return `${fiveDayUrl}?id=${id}${units}&cnt=5${urlKey}`
+        return `${fiveDayUrl}?id=${id}${units}${urlKey}`
     },
 
     coordUrl: (lat, long) => {
@@ -32,7 +32,7 @@ module.exports = {
     },
     fivedayCoordUrl: (lat, long) => {
         let coords = `?lat=${lat}&lon=${long}`
-        return `${fiveDayUrl}${coords}${units}&cnt=5${urlKey}`
+        return `${fiveDayUrl}${coords}${units}${urlKey}`
     },
     mapUrl: (lat, long) => {
         //Testing with clouds first

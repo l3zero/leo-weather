@@ -16,7 +16,7 @@ export class TodayMainDetails extends Component {
 
         if (lat !== null && long !== null) {
             this.getCurrentCoordsWeather(lat, long)
-            // this.getFivedayCoordsWeather(lat, long)
+            this.getFivedayCoordsWeather(lat, long)
         } else if (city !== '') {
             this.getCurrentCityWeather(city)
         }
@@ -70,8 +70,8 @@ export class TodayMainDetails extends Component {
     getFivedayCoordsWeather(lat, long) {
         weatherApi.grabFivedayWeather(lat, long).then(info => {
             this.setState({
-                tomorrowInfo: info
-                // tomorrowIcon: info.iconUrl
+                tomorrowInfo: info,
+                tomorrowIcon: info.iconUrl
             })
         })
     }
@@ -115,8 +115,20 @@ export class TodayMainDetails extends Component {
 
                 <div id="tomorrow" className="tabcontent">
                     <div className="todayList">
-
+                        {Object.entries(this.state.tomorrowInfo).map(item => <p><img src={require(`../img/${item[0]}.svg`)} alt="" /><div>{item[1]}</div></p>)}
                     </div>
+
+                    <div className="iconRow">
+                        <img src={this.state.tomorrowIcon} alt="" />
+                        <img src={this.state.tomorrowIcon} alt="" />
+                        <img src={this.state.tomorrowIcon} alt="" />
+                        <img src={this.state.tomorrowIcon} alt="" />
+                        <img src={this.state.tomorrowIcon} alt="" />
+                        <img src={this.state.tomorrowIcon} alt="" />
+                        <img src={this.state.tomorrowIcon} alt="" />
+                        <img src={this.state.tomorrowIcon} alt="" />
+                    </div>
+
                 </div>
 
                 <div id="five" className="tabcontent">
@@ -127,5 +139,7 @@ export class TodayMainDetails extends Component {
         )
     }
 }
+
+
 
 export default TodayMainDetails
