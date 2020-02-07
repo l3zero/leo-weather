@@ -6,7 +6,7 @@ const weatherApi = require('../helpers/weatherApi')
 export class TodayMainDetails extends Component {
     constructor(props) {
         super(props)
-        this.state = { latitude: this.props.lat, longitude: this.props.long, todayInfo: {}, cityId: this.props.cityId, iconUrl: '' }
+        this.state = { latitude: this.props.lat, longitude: this.props.long, todayInfo: {}, tomorrowInfo: {}, cityId: this.props.cityId, iconUrl: '', tomorrowIcon: '' }
     }
 
     componentDidMount() {
@@ -16,6 +16,7 @@ export class TodayMainDetails extends Component {
 
         if (lat !== null && long !== null) {
             this.getCurrentCoordsWeather(lat, long)
+            // this.getFivedayCoordsWeather(lat, long)
         } else if (city !== '') {
             this.getCurrentCityWeather(city)
         }
@@ -23,7 +24,7 @@ export class TodayMainDetails extends Component {
         document.getElementById("defaultOpen").click()
     }
 
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate(prevProps) {
         let city = this.props.cityId
         let prevCity = prevProps.cityId
         let lat = this.props.lat
@@ -66,6 +67,15 @@ export class TodayMainDetails extends Component {
         })
     }
 
+    getFivedayCoordsWeather(lat, long) {
+        weatherApi.grabFivedayWeather(lat, long).then(info => {
+            this.setState({
+                tomorrowInfo: info
+                // tomorrowIcon: info.iconUrl
+            })
+        })
+    }
+
     getCurrentCityWeather(city) {
         weatherApi.grabCurrentWeather(city).then(info => {
             this.setState({
@@ -87,7 +97,7 @@ export class TodayMainDetails extends Component {
 
                 <div id="today" className="tabcontent">
                     <div className="todayList">
-                        {Object.entries(this.state.todayInfo).map(item => <p><img src={require(`../img/${item[0].split(':').join('').trim()}.svg`)} alt="" /><div>{item[1]}</div></p>)}
+                        {Object.entries(this.state.todayInfo).map(item => <p><img src={require(`../img/${item[0]}.svg`)} alt="" /><div>{item[1]}</div></p>)}
                     </div>
 
                     <div className="iconRow">
@@ -104,7 +114,9 @@ export class TodayMainDetails extends Component {
                 </div>
 
                 <div id="tomorrow" className="tabcontent">
+                    <div className="todayList">
 
+                    </div>
                 </div>
 
                 <div id="five" className="tabcontent">
