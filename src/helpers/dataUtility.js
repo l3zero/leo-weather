@@ -1,5 +1,4 @@
 module.exports = {
-    //For current weather calls
     convertCurrent: (json) => {
         const weather = {
             'City': json.name,
@@ -18,26 +17,23 @@ module.exports = {
         return weather;
     },
     convertFiveday: (json) => {
-        // let weatherArray = []
-        // for (let i = 0; i < 5; i++) {
-        let weather = {
-            'City': json.city.name,
-            'Temperature': `${Math.round(json.list[1].main.temp)} ° F`,
-            'Humidity': `${json.list[1].main.humidity} %`,
-            'WindSpeed': `${Math.round(json.list[1].wind.speed)} mph`,
-            'Sunrise': `${timeStamp(json.city.sunrise)}`,
-            'Sunset': `${timeStamp(json.city.sunset)}`
+        let weatherArray = []
+        for (let i = 0; i < 5; i++) {
+            let weather = {
+                'City': json.city.name,
+                'Temperature': `${Math.round(json.list[i].main.temp)} ° F`,
+                'Humidity': `${json.list[i].main.humidity} %`,
+                'WindSpeed': `${Math.round(json.list[i].wind.speed)} mph`,
+                'Sunrise': `${timeStamp(json.city.sunrise)}`,
+                'Sunset': `${timeStamp(json.city.sunset)}`
+            }
+            Object.defineProperty(weather, 'iconUrl', {
+                value: `http://openweathermap.org/img/wn/${json.list[i].weather[0].icon}@2x.png`,
+                enumerable: false
+            });
+            weatherArray.push(weather)
         }
-        Object.defineProperty(weather, 'iconUrl', {
-            value: `http://openweathermap.org/img/wn/${json.list[1].weather[0].icon}@2x.png`,
-            enumerable: false
-        });
-
-        // weatherArray.push(weather)
-        // }
-
-
-        return weather;
+        return weatherArray;
     }
 }
 

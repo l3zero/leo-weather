@@ -6,7 +6,7 @@ const weatherApi = require('../helpers/weatherApi')
 export class TodayMainDetails extends Component {
     constructor(props) {
         super(props)
-        this.state = { latitude: this.props.lat, longitude: this.props.long, todayInfo: {}, tomorrowInfo: {}, cityId: this.props.cityId, iconUrl: '', tomorrowIcon: '' }
+        this.state = { latitude: this.props.lat, longitude: this.props.long, todayInfo: {}, tomorrowInfo: {}, fiveDay: [], cityId: this.props.cityId, iconUrl: '', tomorrowIcon: '', fiveDayIcon: [] }
     }
 
     componentDidMount() {
@@ -37,7 +37,7 @@ export class TodayMainDetails extends Component {
 
         } else if (lat !== prevLat && long !== prevLong) {
             this.getCurrentCoordsWeather(lat, long)
-
+            this.getFivedayCoordsWeather(lat, long)
         }
     }
 
@@ -70,8 +70,10 @@ export class TodayMainDetails extends Component {
     getFivedayCoordsWeather(lat, long) {
         weatherApi.grabFivedayWeather(lat, long).then(info => {
             this.setState({
-                tomorrowInfo: info,
-                tomorrowIcon: info.iconUrl
+                tomorrowInfo: info[1],
+                tomorrowIcon: info[1].iconUrl,
+                fiveDay: [...info],
+                fiveDayIcon: info.map(day => day.iconUrl)
             })
         })
     }
@@ -90,13 +92,13 @@ export class TodayMainDetails extends Component {
             <div className="todayDetails">
 
                 <div className="tab">
-                    <button id="defaultOpen" className="tablinks" onClick={this.openTab}>Today</button>
+                    <button id="defaultOpen" className="tablinks" onClick={this.openTab}>Current</button>
                     <button className="tablinks" onClick={this.openTab}>Tomorrow</button>
                     <button className="tablinks" onClick={this.openTab}>Five</button>
                 </div>
 
-                <div id="today" className="tabcontent">
-                    <div className="todayList">
+                <div id="current" className="tabcontent">
+                    <div className="oneDayList">
                         {Object.entries(this.state.todayInfo).map(item => <p><img src={require(`../img/${item[0]}.svg`)} alt="" /><div>{item[1]}</div></p>)}
                     </div>
 
@@ -114,7 +116,7 @@ export class TodayMainDetails extends Component {
                 </div>
 
                 <div id="tomorrow" className="tabcontent">
-                    <div className="todayList">
+                    <div className="tomorrowList">
                         {Object.entries(this.state.tomorrowInfo).map(item => <p><img src={require(`../img/${item[0]}.svg`)} alt="" /><div>{item[1]}</div></p>)}
                     </div>
 
@@ -127,11 +129,19 @@ export class TodayMainDetails extends Component {
                         <img src={this.state.tomorrowIcon} alt="" />
                         <img src={this.state.tomorrowIcon} alt="" />
                         <img src={this.state.tomorrowIcon} alt="" />
+
                     </div>
 
                 </div>
 
                 <div id="five" className="tabcontent">
+                    <div className="fiveDayList">
+                        {this.state.fiveDay.map(day =>
+                            Object.entries(day).map(item => <p><img src={require(`../img/${item[0]}.svg`)} alt="" />{item[1]}</p>)
+                        )
+                        }
+                    </div>
+
 
                 </div>
 
