@@ -2,6 +2,10 @@
   "name": "leo-weather",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "npm": "6.13.4",
+    "node": "10.18.1" 	
+},
   "dependencies": {
     "fs": "0.0.1-security",
     "moment": "^2.24.0",
