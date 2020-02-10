@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import '../styles/WeatherApp.css'
-const weatherApi = require('../helpers/weatherApi')
+import { grabCurrentWeather, grabFivedayWeather } from '../helpers/weatherApi'
+
 
 //@TO-DO API data list needs unique keys for each li
 export class TodayMainDetails extends Component {
@@ -61,7 +62,7 @@ export class TodayMainDetails extends Component {
 
     //Helper functions
     getCurrentCoordsWeather(lat, long) {
-        weatherApi.grabCurrentWeather(lat, long).then(info => {
+        grabCurrentWeather(lat, long).then(info => {
             this.setState({
                 todayInfo: info,
                 iconUrl: info.iconUrl
@@ -70,7 +71,7 @@ export class TodayMainDetails extends Component {
     }
 
     getFivedayCoordsWeather(lat, long) {
-        weatherApi.grabFivedayWeather(lat, long).then(info => {
+        grabFivedayWeather(lat, long).then(info => {
             this.setState({
                 tomorrowInfo: info[1],
                 tomorrowIcon: info[1].iconUrl,
@@ -80,7 +81,7 @@ export class TodayMainDetails extends Component {
     }
 
     getCurrentCityWeather(city) {
-        weatherApi.grabCurrentWeather(city).then(info => {
+        grabCurrentWeather(city).then(info => {
             this.setState({
                 todayInfo: info,
                 iconUrl: info.iconUrl
@@ -89,7 +90,7 @@ export class TodayMainDetails extends Component {
     }
 
     getFivedayCityWeather(city) {
-        weatherApi.grabFivedayWeather(city).then(info => {
+        grabFivedayWeather(city).then(info => {
             this.setState({
                 tomorrowInfo: info[1],
                 tomorrowIcon: info[1].iconUrl,
