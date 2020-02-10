@@ -1,10 +1,10 @@
 //Open Weather Map API - See https://openweathermap.org/current for more info
-//@TO-DO check for empty responses and show appropriate message back
 const fetch = require('node-fetch');
 const nodeCache = require('node-cache');
 const apiReq = require('./apiRequest');
 const data = require('./dataUtility');
 const cache = new nodeCache({ stdTTL: 600, maxKeys: 1000000 }) //In seconds
+
 module.exports = {
     grabCurrentWeather: async (cityId, coords) => {
         let myRequest, response, jsonData, myData;

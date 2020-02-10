@@ -6,7 +6,7 @@ const weatherApi = require('../helpers/weatherApi')
 export class TodayMainDetails extends Component {
     constructor(props) {
         super(props)
-        this.state = { latitude: this.props.lat, longitude: this.props.long, todayInfo: {}, tomorrowInfo: {}, fiveDay: [], cityId: this.props.cityId, iconUrl: '', tomorrowIcon: '', fiveDayIcon: [] }
+        this.state = { latitude: this.props.lat, longitude: this.props.long, todayInfo: {}, tomorrowInfo: {}, fiveDay: [], cityId: this.props.cityId, iconUrl: '', tomorrowIcon: '' }
     }
 
     componentDidMount() {
@@ -19,6 +19,7 @@ export class TodayMainDetails extends Component {
             this.getFivedayCoordsWeather(lat, long)
         } else if (city !== '') {
             this.getCurrentCityWeather(city)
+            this.getFivedayCityWeather(city)
         }
         //Select default tab on DOM load
         document.getElementById("defaultOpen").click()
@@ -34,6 +35,7 @@ export class TodayMainDetails extends Component {
 
         if (city !== prevCity) {
             this.getCurrentCityWeather(city)
+            this.getFivedayCityWeather(city)
 
         } else if (lat !== prevLat && long !== prevLong) {
             this.getCurrentCoordsWeather(lat, long)
@@ -72,8 +74,7 @@ export class TodayMainDetails extends Component {
             this.setState({
                 tomorrowInfo: info[1],
                 tomorrowIcon: info[1].iconUrl,
-                fiveDay: [...info],
-                fiveDayIcon: info.map(day => day.iconUrl)
+                fiveDay: [...info]
             })
         })
     }
@@ -83,6 +84,16 @@ export class TodayMainDetails extends Component {
             this.setState({
                 todayInfo: info,
                 iconUrl: info.iconUrl
+            })
+        })
+    }
+
+    getFivedayCityWeather(city) {
+        weatherApi.grabFivedayWeather(city).then(info => {
+            this.setState({
+                tomorrowInfo: info[1],
+                tomorrowIcon: info[1].iconUrl,
+                fiveDay: [...info]
             })
         })
     }
@@ -107,10 +118,6 @@ export class TodayMainDetails extends Component {
                         <img src={this.state.iconUrl} alt="" />
                         <img src={this.state.iconUrl} alt="" />
                         <img src={this.state.iconUrl} alt="" />
-                        <img src={this.state.iconUrl} alt="" />
-                        <img src={this.state.iconUrl} alt="" />
-                        <img src={this.state.iconUrl} alt="" />
-                        <img src={this.state.iconUrl} alt="" />
                     </div>
 
                 </div>
@@ -125,11 +132,6 @@ export class TodayMainDetails extends Component {
                         <img src={this.state.tomorrowIcon} alt="" />
                         <img src={this.state.tomorrowIcon} alt="" />
                         <img src={this.state.tomorrowIcon} alt="" />
-                        <img src={this.state.tomorrowIcon} alt="" />
-                        <img src={this.state.tomorrowIcon} alt="" />
-                        <img src={this.state.tomorrowIcon} alt="" />
-                        <img src={this.state.tomorrowIcon} alt="" />
-
                     </div>
 
                 </div>
@@ -137,7 +139,7 @@ export class TodayMainDetails extends Component {
                 <div id="five" className="tabcontent">
                     <div className="fiveDayList">
                         {this.state.fiveDay.map(day =>
-                            Object.entries(day).map(item => <p><img src={require(`../img/${item[0]}.svg`)} alt="" />{item[1]}</p>)
+                            Object.entries(day).map(item => <p><img src={require(`../img/${item[0]}.svg`)} alt="" /><div>{item[1]}</div></p>)
                         )
                         }
                     </div>

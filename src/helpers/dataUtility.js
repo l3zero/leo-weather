@@ -1,3 +1,5 @@
+const moment = require('moment')
+
 module.exports = {
     convertCurrent: (json) => {
         const weather = {
@@ -21,6 +23,7 @@ module.exports = {
         for (let i = 0; i < 5; i++) {
             let weather = {
                 'City': json.city.name,
+                'Date': moment().add(i, 'days').format('l'),
                 'Temperature': `${Math.round(json.list[i].main.temp)} ° F`,
                 'Humidity': `${json.list[i].main.humidity} %`,
                 'WindSpeed': `${Math.round(json.list[i].wind.speed)} mph`,
