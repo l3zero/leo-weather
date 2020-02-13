@@ -62,97 +62,118 @@ export class TodayMainDetails extends Component {
 
     //Helper functions
     getCurrentCoordsWeather(lat, long) {
-        grabCurrentWeather(lat, long).then(info => {
-            this.setState({
-                todayInfo: info,
-                iconUrl: info.iconUrl
+        try {
+            grabCurrentWeather(lat, long).then(info => {
+                const icon = info === undefined ? 'No icon url exists because undefined' : info.iconUrl
+                this.setState({
+                    todayInfo: info,
+                    iconUrl: icon
+                })
             })
-        })
+        } catch (err) {
+            console.log(err)
+        }
+
     }
 
     getFivedayCoordsWeather(lat, long) {
-        grabFivedayWeather(lat, long).then(info => {
-            this.setState({
-                tomorrowInfo: info[1],
-                tomorrowIcon: info[1].iconUrl,
-                fiveDay: [...info]
+        try {
+            grabFivedayWeather(lat, long).then(info => {
+                const icon = info === undefined ? 'No icon url exists because undefined' : info[1].iconUrl
+                this.setState({
+                    tomorrowInfo: info[1],
+                    tomorrowIcon: icon,
+                    fiveDay: [...info]
+                })
             })
-        })
+        } catch (error) {
+            console.log(error)
+        }
+
     }
 
     getCurrentCityWeather(city) {
-        grabCurrentWeather(city).then(info => {
-            this.setState({
-                todayInfo: info,
-                iconUrl: info.iconUrl
+        try {
+            grabCurrentWeather(city).then(info => {
+                const icon = info === undefined ? 'No icon url exists because undefined' : info.iconUrl
+                this.setState({
+                    todayInfo: info,
+                    iconUrl: icon
+                })
             })
-        })
+        } catch (error) {
+            console.log(error)
+        }
+
     }
 
     getFivedayCityWeather(city) {
-        grabFivedayWeather(city).then(info => {
-            this.setState({
-                tomorrowInfo: info[1],
-                tomorrowIcon: info[1].iconUrl,
-                fiveDay: [...info]
+        try {
+            grabFivedayWeather(city).then(info => {
+                const icon = info === undefined ? 'No icon url exists because undefined' : info[1].iconUrl
+                this.setState({
+                    tomorrowInfo: info[1],
+                    tomorrowIcon: icon,
+                    fiveDay: [...info]
+                })
             })
-        })
+        } catch (error) {
+            console.log(error)
+        }
+
     }
 
     render() {
-        return (
-            <div className="todayDetails">
+        if (this.state.todayInfo === undefined || this.state.tomorrowInfo === undefined || this.state.fiveDay.includes(undefined)) {
+            return 'Undefined values found in API calls. Please reload page and try again. If the issue persists please contact app owner @ https://github.com/krym1337'
+        } else {
+            return (
+                <div className="todayDetails">
 
-                <div className="tab">
-                    <button id="defaultOpen" className="tablinks" onClick={this.openTab}>Current</button>
-                    <button className="tablinks" onClick={this.openTab}>Tomorrow</button>
-                    <button className="tablinks" onClick={this.openTab}>Five</button>
-                </div>
-
-                <div id="current" className="tabcontent">
-                    <div className="oneDayList">
-                        {Object.entries(this.state.todayInfo).map(item => <p><img src={require(`../img/${item[0]}.svg`)} alt="" /><div>{item[1]}</div></p>)}
+                    <div className="tab">
+                        <button id="defaultOpen" className="tablinks" onClick={this.openTab}>Current</button>
+                        <button className="tablinks" onClick={this.openTab}>Tomorrow</button>
+                        <button className="tablinks" onClick={this.openTab}>Five</button>
                     </div>
 
-                    <div className="iconRow">
-                        <img src={this.state.iconUrl} alt="" />
-                        <img src={this.state.iconUrl} alt="" />
-                        <img src={this.state.iconUrl} alt="" />
-                        <img src={this.state.iconUrl} alt="" />
+                    <div id="current" className="tabcontent">
+                        <div className="oneDayList">
+                            {Object.entries(this.state.todayInfo).map(item => <p><img src={require(`../img/${item[0]}.svg`)} alt="" /><div>{item[1]}</div></p>)}
+                        </div>
+
+                        <div className="iconRow">
+                            <img src={this.state.iconUrl} alt="" />
+                            <img src={this.state.iconUrl} alt="" />
+                            <img src={this.state.iconUrl} alt="" />
+                            <img src={this.state.iconUrl} alt="" />
+                        </div>
                     </div>
 
-                </div>
+                    <div id="tomorrow" className="tabcontent">
+                        <div className="tomorrowList">
+                            {Object.entries(this.state.tomorrowInfo).map(item => <p><img src={require(`../img/${item[0]}.svg`)} alt="" /><div>{item[1]}</div></p>)}
+                        </div>
 
-                <div id="tomorrow" className="tabcontent">
-                    <div className="tomorrowList">
-                        {Object.entries(this.state.tomorrowInfo).map(item => <p><img src={require(`../img/${item[0]}.svg`)} alt="" /><div>{item[1]}</div></p>)}
-                    </div>
-
-                    <div className="iconRow">
-                        <img src={this.state.tomorrowIcon} alt="" />
-                        <img src={this.state.tomorrowIcon} alt="" />
-                        <img src={this.state.tomorrowIcon} alt="" />
-                        <img src={this.state.tomorrowIcon} alt="" />
-                    </div>
-
-                </div>
-
-                <div id="five" className="tabcontent">
-                    <div className="fiveDayList">
-                        {this.state.fiveDay.map(day =>
-                            Object.entries(day).map(item => <p><img src={require(`../img/${item[0]}.svg`)} alt="" /><div>{item[1]}</div></p>)
-                        )
-                        }
+                        <div className="iconRow">
+                            <img src={this.state.tomorrowIcon} alt="" />
+                            <img src={this.state.tomorrowIcon} alt="" />
+                            <img src={this.state.tomorrowIcon} alt="" />
+                            <img src={this.state.tomorrowIcon} alt="" />
+                        </div>
                     </div>
 
 
-                </div>
-
-            </div>
-        )
+                    <div id="five" className="tabcontent">
+                        <div className="fiveDayList">
+                            {this.state.fiveDay.map(day =>
+                                Object.entries(day).map(item => <p><img src={require(`../img/${item[0]}.svg`)} alt="" /><div>{item[1]}</div></p>)
+                            )
+                            }
+                        </div>
+                    </div>
+                </div >
+            )
+        }
     }
 }
-
-
-
 export default TodayMainDetails

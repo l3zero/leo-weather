@@ -2,11 +2,17 @@ const moment = require('moment')
 
 module.exports = {
     convertCurrent: (json) => {
+        let viz = isNaN((json.visibility / 1000).toFixed(0)) ? 'Not available' : (json.visibility / 1000).toFixed(0)
+
+        if (viz !== 'Not available') {
+            viz += ' mi'
+        }
+
         const weather = {
             'City': json.name,
             'Temperature': `${Math.round(json.main.temp)} ° F`,
             'Humidity': `${json.main.humidity} %`,
-            'Visibility': `${(json.visibility / 1000).toFixed(0)} miles`,
+            'Visibility': `${viz}`,
             'WindSpeed': `${Math.round(json.wind.speed)} mph`,
             'Sunrise': `${timeStamp(json.sys.sunrise)}`,
             'Sunset': `${timeStamp(json.sys.sunset)}`
