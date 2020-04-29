@@ -1,7 +1,7 @@
 const currentWeatherUrl = "https://api.openweathermap.org/data/2.5/weather"
 const fiveDayUrl = "https://api.openweathermap.org/data/2.5/forecast"
 const units = "&units=imperial"
-const apiKey = '6fb4f376b050985122f9f3d746b0f560'
+const apiKey = process.env.REACT_APP_OPENWEATHER_KEY //Need to test this!!
 const urlKey = `&appid=${apiKey}`
 
 const headers = new Headers({
