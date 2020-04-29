@@ -19,7 +19,7 @@
   },
   "scripts": {
     "start": "node server.js",
-    "build": "react-scripts build",
+    "build": "REACT_APP_OPENWEATHER_KEY=6fb4f376b050985122f9f3d746b0f560 react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
